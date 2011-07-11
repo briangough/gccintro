@@ -1,0 +1,65 @@
+Network Theory publishes books about free software under free
+documentation licenses.  Our current catalogue includes the following
+titles:
+
+@itemize @bullet
+@item
+@uref{http://www.network-theory.co.uk/diff/manual/,@cite{Comparing and Merging Files with GNU diff and patch},@cite{Comparing and Merging Files with GNU diff and patch}}
+by David MacKenzie, Paul Eggert, and Richard Stallman
+(ISBN 0-9541617-5-0) $19.95 (@pounds{}12.95)
+
+@item
+@uref{http://www.network-theory.co.uk/cvs/manual/,@cite{Version Management with CVS},@cite{Version Management with CVS}}
+by Per Cederqvist et al.
+(ISBN 0-9541617-1-8) $29.95 (@pounds{}19.95)
+
+@item
+@uref{http://www.network-theory.co.uk/bash/manual/,@cite{GNU Bash Reference Manual},@cite{GNU Bash Reference Manual}}
+by Chet Ramey and Brian Fox
+(ISBN 0-9541617-7-7) $29.95 (@pounds{}19.95)
+	
+@item
+@uref{http://www.network-theory.co.uk/R/manual/,@cite{An Introduction to R},@cite{An Introduction to R}}
+by W.N. Venables, D.M. Smith and the R Development Core Team
+(ISBN 0-9541617-4-2) $19.95 (@pounds{}12.95)
+
+@item
+@uref{http://www.network-theory.co.uk/octave/manual/,@cite{GNU Octave Manual},@cite{GNU Octave Manual}}
+by John W. Eaton
+(ISBN 0-9541617-2-6) $29.99 (@pounds{}19.99)
+	
+@item
+@uref{http://www.network-theory.co.uk/gsl/manual/,@cite{GNU Scientific Library Reference Manual---Second Edition},@cite{GNU Scientific Library Reference Manual---Second Edition}}
+by M. Galassi, J. Davies, J. Theiler, B. Gough, G. Jungman, M. Booth, F. Rossi
+(ISBN 0-9541617-3-4) $39.99 (@pounds{}24.99)
+
+@item
+@uref{http://www.network-theory.co.uk/python/manual/,@cite{An Introduction to Python},@cite{An Introduction to Python}}
+by Guido van Rossum and Fred L. Drake, Jr.
+(ISBN 0-9541617-6-9) $19.95 (@pounds{}12.95)
+	
+@item
+@uref{http://www.network-theory.co.uk/python/language/,@cite{Python Language Reference Manual},@cite{Python Language Reference Manual}}
+by Guido van Rossum and Fred L. Drake, Jr.
+(ISBN 0-9541617-8-5) $19.95 (@pounds{}12.95)
+
+@item
+@uref{http://www.network-theory.co.uk/R/base/,@cite{The R Reference Manual---Base Package (Volume 1)},@cite{The R Reference Manual---Base Package (Volume 1)}}
+by the R Development Core Team
+(ISBN 0-9546120-0-0) $69.95 (@pounds{}39.95)
+
+@item
+@uref{http://www.network-theory.co.uk/R/base/,@cite{The R Reference Manual---Base Package (Volume 2)},@cite{The R Reference Manual---Base Package (Volume 2)}}
+by the R Development Core Team
+(ISBN 0-9546120-1-9) $69.95 (@pounds{}39.95)
+@end itemize
+
+@noindent
+All titles are available for order from bookstores worldwide.  
+
+@noindent
+Sales of the manuals fund the development of more free software and
+documentation. 
+
+@noindent
+For details, visit the website @uref{http://www.network-theory.co.uk/}

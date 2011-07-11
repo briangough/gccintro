@@ -1,0 +1,3 @@
+/* foo.h */
+#include "bar.h"
+...

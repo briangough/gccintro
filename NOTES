@@ -1,0 +1,145 @@
+# -*- org -*-
+#+CATEGORY: gccintro
+
+* Changes in GCC 4
+
+compile time computation of constants affects quite a few examples:
+
+calc.c - fixed
+badpow.c
+
+* Updates for gcc 4.3
+
+On other hand I've been testing examples of code. I'm using gcc 4.3 to do
+it. I've found more discrepances: 
+
+** TODO Page 23 I can execute ./a.out without problems. 
+** TODO One observation in page 43 is that only when ulimit -c unlimited
+is executed appears the core file. Another observation, in the chapter
+9 the tells about the number of version, we can update it.
+** TODO Pag 73: with "gcc -Wall -fsigned-char signed.c doesn't appear warnings
+** TODO Pag 77: there are error in gcc -Wall -g loop.c, I can't execute ./a.out
+** DONE Pag 91: I've updated some option in ld command:
+ld -dynamic-linker /lib/ld-linux.so.2 /usr/lib/crt1.o /usr/lib/crti.o
+/usr/lib/gcc/i486-linux-gnu/4.3/crtbegin.o -L/usr/lib/gcc/i486-linux-gnu/4.3
+hello.o -lgcc -lgcc_eh -lc /usr/lib/gcc/i486-linux-gnu/4.3/crtend.o
+/usr/lib/crtn.o
+** TODO Pag 95: I'd include the strings command in this chapter.
+** TODO Pag 98: I've troubles to reproduce these error messages...
+** DONE Pages 53, 54 the source file is optim.c instead of test.c. 
+   CLOSED: [2009-06-03 mié 14:19]
+** File naming scheme
+These are controlled by the makeexamples.pl script, maybe we need a
+better scheme (perhaps using some kind of annotation in the file to
+indicate the correct filename)
+*** Pag 71: exists fptest2.c instead of fptest.c
+*** Pag 82,83: exist main3.c instead of main.c
+*** Pag 76: In examples-1.1/09 doesn't exist hello.c
+*** Pag 95: examples-1.1/12 doesn't exist
+
+* TODO Highlight important changes in release notes
+Another task you could do is to check all the changes in gcc-4
+relevant to the book.
+
+They are documented in the following pages:
+
+  http://gcc.gnu.org/gcc-4.0/changes.html
+  http://gcc.gnu.org/gcc-4.1/changes.html
+  http://gcc.gnu.org/gcc-4.2/changes.html
+  http://gcc.gnu.org/gcc-4.3/changes.html
+  http://gcc.gnu.org/gcc-4.3/porting_to.html
+
+which I've downloaded and put in the bzr repository in the changes/
+subdirectory.
+
+! What you could do is edit the files and highlight the important
+! sections, e.g. by marking the start of the relevant lines (like this
+! paragraph).  The important sections are the major new features,
+! changes and incompatibilities that affect the subjects covered by
+! the book.
+
+The changes I am interested in are:
+
+ - EITHER a new feature of wide interest to general users and beginners
+ - OR a change that is directly related to something in the book
+
+The "Caveats" and "Other significant improvements" sections are
+particularly important.  You can ignore a lot of stuff:
+
+ - The book doesn't cover java/fortran/ADA etc so these are irrelevant.
+ - For C++ I only care if it affects something mentioned in the book
+   (90% of changes related to the C++ language/library are therefore
+   irrelevant)
+ - I'm not interested interested in CPU specific changes unless
+   specifically different from something in the book (e.g. x86
+   floating point)
+
+----------------------------------------------------------------------
+
+* TODO Make a general web search for articles about GCC4 and its new features
+
+Restrict the search to articles published on reputable sites like
+Developerworks, LWN, O'Reilly and any others you can think of.
+  
+Send me a list of any articles you find and also read them yourself.
+
+* TODO Scan the list archives for common errors and problems
+Scan the archives of the gcc-help mailing list for common errors
+reported by users since gcc4 was released (April 2005).  I'd like a
+list of problems of interest to beginning users not covered in the
+book.
+
+Make a selection of months, and check all the messages in that month.
+There is no need to read every month. e.g. start with
+
+May 2005, May 2006, May 2007, May 2008, May 2009.
+
+For each month, create an entry in this file any links to the start of
+relevant threads and a 1-2 line description of what's interesting
+about it.
+
+You can find the archives in various formats at:
+
+  http://gcc.gnu.org/ml/gcc-help/
+  http://dir.gmane.org/gmane.comp.gcc.help
+
+Note: a lot of things you can *ignore* are
+  - GCC build/configuration issues
+  - internal compiler errors
+(so there are a lot of messages you can skip).
+
+----------------------------------------------------------------------
+
+
+
+* Brian's old notes 
+  not including a header file
+passing an argument of the incorrect type
+not turning on warnings
+
+not linking with the correct library
+
+
+warning: value computed is not used
+EXAMPLE;  for (i = 0, i < 10; i++)
+
+instead of for (i = 0; i < 10; i++)
+
+forward.c:53: warning: assignment from incompatible pointer type
+
+----------------------------------------------------------------------
+
+The best article is "Get to know GCC4" (
+http://www.ibm.com/developerworks/linux/library/l-gcc4/index.html?S_TACT=105AGX01&S_CMP=LP).
+You've a summary of each release in the core changes, very useful.
+
+Tree SSA: A New Optimization Infrastructure for
+GCC<http://gcc.fyxm.net/summit/2003/Tree%20SSA%20-%20A%20New%20optimization%20infrastructure.pdf>,
+Autovectorization in
+GCC<ftp://gcc.gnu.org/pub/gcc/summit/2004/Autovectorization.pdf>and
+introduction
+to OpenMP <http://en.wikipedia.org/wiki/OpenMP> are interesting if you are
+excited with Get to know GCC4.
+Sun Studio 12 vs. GCC3 vs. GCC4 Benchmarks (
+http://www.phoronix.com/scan.php?page=article&item=sun_studio_gcc&num=6) is
+a curious article to OpenSolaris users. Regards.

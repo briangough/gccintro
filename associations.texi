@@ -1,0 +1,33 @@
+The GNU Compiler Collection is part of the GNU Project, launched in 1984
+to develop a complete Unix-like operating system which is free software:
+the GNU system.  
+
+The Free Software Foundation (FSF) is a tax-exempt charity that raises
+funds for continuing work on the GNU Project.  It is dedicated to
+promoting the right to use, study, copy, modify, and redistribute
+computer programs.  One of the best ways to help the development of free
+software is to become an associate member of the Free Software
+Foundation, and pay regular dues to support their efforts.  
+
+Associate members of the Free Software Foundation receive many benefits,
+including regular newsletters, admission to the FSF annual meeting, and
+discounts on books and CDROMs published by GNU Press.  Membership dues
+are also tax deductible in the USA.  For more information on becoming a
+member, visit the FSF website at @uref{http://www.fsf.org/}.
+
+The Free Software Foundation Europe (FSFE) is a sister organisation of
+the Free Software Foundation.  The FSFE is active in promoting free
+software at all levels in Europe.  For an annual membership fee,
+individuals can join FSFE and support its work.  Members receive a
+personalised GPG-compatible membership smartcard, allowing secure
+digital authentication of email and files, and gain access to the ``FSFE
+Fellowship'', an electronic community for software freedom.  For more
+information, visit the FSFE website at @uref{http://www.fsfe.org/}.
+
+The @cite{Foundation for a Free Information Infrastructure (FFII)} is
+another important organization in Europe.  FFII is not specific to free
+software, but works to defend the rights of all programmers and computer
+users against monopolies in the field of computing, such as patents on
+software.  For more information about FFII, or to support their work
+with a donation, visit their website at @uref{http://www.ffii.org/}.
+

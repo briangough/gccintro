@@ -1,0 +1,45 @@
+@node Foreword
+@unnumbered Foreword
+@i{This foreword has been kindly contributed by Richard M.@: Stallman, the
+principal author of GCC and founder of the GNU Project.}
+@vskip 1ex
+
+This book is a guide to getting started with GCC, the GNU Compiler
+Collection.  It will tell you how to use GCC as a programming tool.
+GCC is a programming tool, that's true---but it is also something
+more.  It is part of a 20-year campaign for freedom for computer
+users.
+ 
+We all want good software, but what does it mean for software to be
+``good''?  Convenient features and reliability are what it means to
+be @emph{technically} good, but that is not enough.  Good software
+must also be @emph{ethically} good: it has to respect the users'
+freedom.
+
+As a user of software, you should have the right to run it as you see
+fit, the right to study the source code and then change it as you see
+fit, the right to redistribute copies of it to others, and the right
+to publish a modified version so that you can contribute to building
+the community.  When a program respects your freedom in this way, we
+call it @dfn{free software}.  Before GCC, there were other compilers
+for C, Fortran, Ada, etc.  But they were not free software; you could
+not use them in freedom.  I wrote GCC so we could use a compiler
+without giving up our freedom.
+
+A compiler alone is not enough---to use a computer system, you need a
+whole operating system.  In 1983, all operating systems for modern
+computers were non-free.  To remedy this, in 1984 I began developing
+the GNU operating system, a Unix-like system that would be free
+software.  Developing GCC was one part of developing GNU.
+
+By the early 90s, the nearly-finished GNU operating system was
+completed by the addition of a kernel, Linux, that became free
+software in 1992.  The combined GNU/Linux operating system has
+achieved the goal of making it possible to use a computer in freedom.
+But freedom is never automatically secure, and we need to work to
+defend it.  The Free Software Movement needs your support.
+@vskip 1ex
+@flushright
+Richard M.@: Stallman
+February 2004
+@end flushright
