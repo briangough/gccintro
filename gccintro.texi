@@ -105,6 +105,7 @@ published by Network Theory Ltd raise money for more free documentation.
 * Compiling for debugging::     
 * Compiling with optimization::  
 * Compiling a C++ program::     
+* Security enhancement options::
 * Platform-specific options::   
 * Troubleshooting::             
 * Compiler-related tools::      
@@ -929,11 +930,14 @@ chapter.
 @cindex standard library, C
 @cindex library, C standard library
 The standard system libraries are usually found in the directories
-@file{/usr/lib} and @file{/lib}.@footnote{On systems supporting both 64
-and 32-bit executables the 64-bit versions of the libraries will often
-be stored in @file{/usr/lib64} and @file{/lib64}, with the 32-bit
-versions in @file{/usr/lib} and @file{/lib}.}  For example, the C math
-library is typically stored in the file @file{/usr/lib/libm.a} on Unix-like
+@file{/usr/lib} and @file{/lib}.@footnote{On systems supporting both 64 and
+32-bit executables, their libraries are stored in the directories
+@file{/lib/x86_64-linux-gnu} and @file{/usr/lib/x86_64-linux-gnu}, or
+@file{/lib64} and @file{/usr/lib64} for 64-bit libraries; and
+@file{/lib/i386-linux-gnu} and @file{/usr/lib/i386-linux-gnu}, or @file{/lib}
+and @file{/usr/lib} for 32-bit libraries, instead.  @pxref{Multi-architecture
+support}} For example, the C math
+library is typically stored in the file @file{/usr/lib/libm.so} on Unix-like
 systems. The corresponding prototype declarations for the functions in
 this library are given in the header file @file{/usr/include/math.h}.
 The C standard library itself is stored in @file{/usr/lib/libc.a} and
@@ -1239,12 +1243,13 @@ The list of directories for header files is often referred to as the
 @cindex libraries, on 64-bit platforms
 @cindex 64-bit platforms, additional library directories
 @cindex system libraries, location of
-The directories on these paths are searched in order, from first to last
-in the two lists above.@footnote{The default search paths may also
-include additional system-dependent or site-specific directories, and
-directories in the GCC installation itself. For example, on 64-bit
-platforms additional @file{lib64} directories may also be searched by
-default.}  For example, a header file found in
+The directories on these paths are searched in order, from first to last in
+the two lists above.@footnote{The default search paths may also include
+additional system-dependent or site-specific directories, and directories in
+the GCC installation itself. For example, on 64-bit platforms additional
+@file{/usr/lib/x86_64-linux-gnu} or @file{/usr/lib64} directories may also be
+searched by default. @pxref{Multi-architecture support}}
+For example, a header file found in
 @file{/usr/local/include} takes precedence over a file with the same
 name in @file{/usr/include}.  Similarly, a library found in
 @file{/usr/local/lib} takes precedence over a library with the same
@@ -3869,7 +3874,192 @@ do not support it either.  The inclusion compilation model described
 earlier is recommended as the simplest and most portable way to use
 templates.
 
+@node Security enhancement options
+@chapter Security enhancement options
+@cindex security enhancement options
+@cindex options, security enhancement
 
+Recent GCC (4.1 or newer) on modern hardwares provides a good range of
+security enhancement options.  Popular security enhancement options used by
+the major Linux distributions for their package building defaults and some
+non-default options are described here.@footnote{For Debian wheezy, you can
+obtain distribution recommended GCC options using the @code{dpkg-buildflag}
+command.} You should consider enabling these options for your application as
+needed by explicitly specifying them.
+
+Please note that these security enhancement options may not be available on
+your platform.
+
+Please also note that these security enhancement options may cause problems
+depending on your GCC version and your application.  Since some distributions
+make these options as the default of GCC, you may need to explicitly disable
+these options for some limited situations to avoid such problems.
+
+@menu
+* Warning for format string::
+* Stack smashing protector (SSP)::     
+* Buffer overflow protection::
+* Read-only relocations::
+* Binding policy NOW::
+@end menu
+
+@node Warning for format string
+@section Warning for format string
+@cindex warning for format string
+@cindex @option{-Wformat-security} option, warn about uncontrolled format string
+@cindex @option{-Wformat} option, warn about incorrect format strings
+@cindex uncontrolled format string
+The possible security vulnerability of uncontrolled format
+string@footnote{@uref{http://en.wikipedia.org/wiki/Uncontrolled_format_string}}
+in @code{printf()} and the similar functions can be detected and warned with GCC using the
+option @option{-Wformat -Wformat-security}.
+
+Example of insecure code: @file{format.c}
+
+@example
+@verbatiminclude format.c
+@end example
+@noindent
+
+The insecure program @file{format.c} can be compiled without obvious warnings.
+
+@example
+$ gcc -Wall format.c
+@end example
+@noindent
+
+The insecure program @file{format.c} can be compiled with the option
+@option{-Wformat -Wformat-security} with warnings.
+
+@example
+$ gcc -Wformat -Wformat-security format.c
+format.c: In function ‘main’:
+format.c:9:7: warning: format not a string literal and no format arguments 
+[-Wformat-security]
+@end example
+@noindent
+
+The output shows that the @file{format.c} program compiled with the option
+@option{-Wformat-security} warns about the possible security vulnerability of
+uncontrolled format string.
+
+@node Stack smashing protector (SSP)
+@section Stack smashing protector (SSP)
+@cindex stack smashing protector
+@cindex SSP, stack smashing protector
+@cindex @option{-fstack-protector} option
+@cindex @option{--param=ssp-buffer-size=4} option
+Exploitability of many buffer
+overflows@footnote{@uref{http://en.wikipedia.org/wiki/Buffer_overflow_protection}}
+can be mitigated by compiling a program with GCC using the option
+@option{-fstack-protector}.@footnote{You may use the option
+@option{-fstack-protector --param=ssp-buffer-size=4} instead to protect more
+functions with SSP. See @file{/usr/share/doc/gcc-*/README.ssp}.}
+
+This option causes the GCC to insert a check for stack buffer overflows before
+function returns. If an attempt is made to exploit a buffer overflow
+vulnerability in the program, the application will be killed immediately. This
+reduces the risk of any unknown potential exploits to a denial-of-service.
+
+Example of insecure code: @file{bof.c}
+
+@example
+@verbatiminclude bof.c
+@end example
+@noindent
+
+The insecure program @file{bof.c} can be compiled without obvious warnings.
+
+@example
+$ gcc -Wall bof.c -o bof
+$ ./bof '123456789' || echo error
+>>> Before the possible buffer over flow >>>
+<<< After the possible buffer over flow <<<
+@end example
+@noindent
+
+The output shows that the @file{bof.c} program compiled without using
+the option @option{-fstack-protector} creates an executable @file{bof} which
+executes an insecure buffer overflow code silently.
+
+The insecure program @file{bof.c} can be compiled with the option
+@option{-fstack-protector}.
+
+@example
+$ gcc -Wall -fstack-protector bof.c -o bof-ssp
+$ ./bof-ssp '123456789' || echo error
+>>> Before the possible buffer over flow >>>
+<<< After the possible buffer over flow <<<
+*** stack smashing detected ***: ./bof-ssp terminated
+... [snipped]
+Aborted
+Error
+@end example
+@noindent
+
+The output shows that the @file{bof.c} program compiled with the option
+@option{-fstack-protector} creates an executable @file{bof-ssp}.  When the
+executable @file{bof-ssp} is executed, it detects stack smashing and exits safely.
+
+@node Buffer overflow protection
+@section Buffer overflow protection
+@cindex buffer overflow protection
+@cindex @option{-D_FORTIFY_SOURCE} option
+@cindex @option{-O1} option, optimization level one
+@cindex @option{-O2} option, optimization level two
+@cindex @code{_FORTIFY_SOURCE} macro
+The GCC macro definition of @option{-D_FORTIFY_SOURCE} provides a lightweight
+buffer overflow protection to some memory and string functions provided by the
+GLIBC. This feature uses macro substitution of such vulnerable functions to
+prevent an insecure buffer overflow code to be executed.  The compiler
+optimization option needs to be  @option{-O1} or higher to enable
+@option{-D_FORTIFY_SOURCE}.@footnote{@uref{http://www.redhat.com/archives/fedora-tools-list/2004-September/msg00002.html}}
+
+The insecure program @file{bof.c} shown in the previous section can be compiled
+with the option @option{-D_FORTIFY_SOURCE=2 -O2}.
+
+@example
+$ gcc -Wall -D_FORTIFY_SOURCE=2 -O2 bof.c -o bof-fort
+$ ./bof-fort '123456789' || echo error
+>>> Before the possible buffer over flow >>>
+*** buffer overflow detected ***: ./bof-fort terminated
+... [snipped]
+Aborted
+Error
+@end example
+@noindent
+
+The output shows that the @file{bof.c} program compiled with the option
+@option{-D_FORTIFY_SOURCE=2 -O2} creates an executable @file{bof-fort} which
+stops before executing an insecure buffer overflow code.
+
+This @option{-D_FORTIFY_SOURCE} option is a quick fix for older programs
+written with fixed length buffers.  But if you are writing a software program
+from scratch, please consider to use the secure libraries such as the
+@code{GLib} library@footnote{@uref{http://en.wikipedia.org/wiki/GLib}} instead
+of the standard @code{Libc} library.
+
+@node Read-only relocations
+@section Read-only relocations
+@cindex Read-only relocations
+@cindex @option{-Wl,z,relro} option
+The GCC linker option of @option{-Wl,z,relro} for the read-only relocations provides
+read-only protection to several ELF memory sections after the program is loaded
+and linked completely by the linker to prevent attacks that involve overwriting
+data in the Global Offset Table (GOT).
+
+@node Binding policy NOW
+@section Binding policy NOW
+@cindex Binding policy NOW
+@cindex @option{-Wl,z,now} option
+@cindex @option{-Wl,z,relro} option
+The GCC optional linker option of @option{-Wl,z,now} for the binding policy NOW
+forces the program to load and link completely and marks its GOT read-only with
+the @option{-Wl,z,relro} option before turning over control to the program.
+
+Since this option causes start-up slowdown for large applications, this is not
+enabled by default.  But this option may be interesting for the security
+conscious network daemons.
 
 @node Platform-specific options
 @chapter Platform-specific options
@@ -4201,19 +4391,33 @@ files, but giving the @option{-m32} option will generate a 32-bit object
 file for the corresponding architecture.@footnote{The options
 @option{-maix64} and @option{-maix32} are used on AIX.}
 
-@cindex Itanium, multi-architecture support
 @cindex system libraries, location of
 Note that support for multiple architectures depends on the
-corresponding libraries being available.  On 64-bit platforms supporting
-both 64 and 32-bit executables, the 64-bit libraries are often placed in
-@file{lib64} directories instead of @file{lib} directories, e.g. in
-@file{/usr/lib64} and @file{/lib64}.  The 32-bit libraries are then
-found in the default @file{lib} directories as on other platforms.  This
-allows both a 32-bit and a 64-bit library with the same name to exist on
-the same system.  Other systems, such as the IA64/Itanium, use the
-directories @file{/usr/lib} and @file{/lib} for 64-bit libraries.  GCC
-knows about these paths and uses the appropriate path when compiling
-64-bit or 32-bit code.
+corresponding libraries being available.  GCC knows about these paths
+and uses the appropriate path when compiling 64-bit or 32-bit code.
+
+@cindex multi-architecture support, Debian
+@cindex multi-architecture support, Ubuntu
+On systems simultaneously supporting multiple binary target
+architectures such as Debian wheezy and Ubuntu 11.04, the libraries with
+the corresponding architecture ABI will be stored in
+@file{/usr/lib/@var{multiarch_name}} and
+@file{/lib/@var{multiarch_name}}.  The multiarch architecture specifier
+(tuple) @file{@var{multiarch_name}} takes values such as
+@file{x86_64-linux-gnu} for the 64-bit PC Linux versions, and
+@file{i386-linux-gnu} for the 32-bit PC Linux versions.  Please note
+that the multiarch architecture specifier is not exactly the same as the
+GNU triplets although they are similar.
+
+@cindex multi-architecture support, RedHat
+@cindex multi-architecture support, older systems
+@cindex Itanium, multi-architecture support
+On most system simultaneously supporting only 32-bit and 64-bit binary
+target architectures such as RedHat, the 64-bit versions of the
+libraries will often be stored in @file{/usr/lib64} and @file{/lib64},
+with the 32-bit versions in @file{/usr/lib} and @file{/lib}.  Other
+systems, such as the IA64/Itanium, use the directories @file{/usr/lib}
+and @file{/lib} for 64-bit libraries.
 
 @node Floating-point issues
 @section Floating-point issues
