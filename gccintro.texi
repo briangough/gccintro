@@ -14,7 +14,13 @@
 @finalout
 @end iftex
 
-@setchapternewpage odd
+@setchapternewpage on
+
+@c For installing properly under Debian packaging system
+@dircategory Software development
+@direntry
+ * gccintro: (gccintro).	Introduction to GCC by Brian J. Gough.
+@end direntry
 
 @titlepage
 @title An Introduction to GCC
@@ -78,7 +84,7 @@ The Texinfo source for this manual may be obtained from: @*
 
 @contents
 
-@ifinfo
+@ifnottex
 @node Top
 @top An Introduction to GCC
 
@@ -89,7 +95,7 @@ This manual provides an introduction to the GNU C and C++ Compilers,
 The development of this manual was funded entirely by
 @uref{http://www.network-theory.co.uk/,Network Theory Ltd}.  Copies
 published by Network Theory Ltd raise money for more free documentation.
-@end ifinfo
+@end ifnottex
 
 @menu
 * Introduction::                
@@ -110,12 +116,15 @@ published by Network Theory Ltd raise money for more free documentation.
 * Acknowledgements::            
 * Other books from the publisher::  
 * Free software organizations::  
+@ifnotinfo
+* GNU Free Documentation License::
+@end ifnotinfo
 * Index::                       
 @end menu
 
-@ifnotinfo
+@iftex
 @include rms.texi
-@end ifnotinfo
+@end iftex
 
 @node Introduction
 @chapter Introduction
@@ -6370,11 +6379,9 @@ Project, for writing GCC and making it free software.
 @include fdl.texi
 @end ifnotinfo
 
-@ifnothtml
 @node Index
 @unnumbered Index
 @printindex cp
-@end ifnothtml
 
 @ifset extrablankpages
 @comment final page must be blank for printed version
