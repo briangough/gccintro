@@ -25,13 +25,19 @@
 @titlepage
 @title An Introduction to GCC
 @subtitle for the GNU Compilers @code{gcc} and @code{g++}
-@subtitle Revised and updated
+@subtitle Revised and updated for Debian
 @author Brian Gough
 @author Foreword by Richard M.@: Stallman
 @page
+Debian package version. 2012
+
+The content of this Debian packaged version adds a chapter on ``Security
+enhancement options'' and makes some minor file path adjustments to match
+learning experiences under the Debian environment.
 @vskip 0pt plus 1filll
-@ifset publish
 @flushleft
+Followings are the original page content.
+
 A catalogue record for this book is available from the British Library.
 
 Second printing, August 2005 (1/8/2005). Revised and updated.
@@ -61,7 +67,6 @@ of Static Free Software
 Free Software provides support for Electric to the electronics design
 industry.
 @vskip 1ex
-@end ifset
 Copyright @copyright{} 2004, 2005 Network Theory Ltd.
 
 Permission is granted to copy, distribute and/or modify this document
@@ -95,6 +100,10 @@ This manual provides an introduction to the GNU C and C++ Compilers,
 The development of this manual was funded entirely by
 @uref{http://www.network-theory.co.uk/,Network Theory Ltd}.  Copies
 published by Network Theory Ltd raise money for more free documentation.
+
+The content of this Debian packaged version adds a chapter on ``Security
+enhancement options'' and makes some minor file path adjustments to match
+learning experiences under the Debian environment.
 @end ifnottex
 
 @menu
