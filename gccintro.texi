@@ -4270,10 +4270,17 @@ differences between these implementations lead to changes in rounding
 and underflow/overflow behavior, because intermediate values have a
 greater relative precision and exponent range when computed in extended
 precision.@footnote{For quantities held in the x87 extended-precision
-registers the relative precision is @scinum{5.42,-20} and the exponent
-range is @scirange{10,4932}.  Standard double precision values have a
-relative precision of @scinum{2.22,-16} and an exponent range of
-@scirange{10,308}.} In particular, comparisons involving extended
+registers the relative precision is
+@scinum{5.42,-20}
+and the exponent
+range is
+@scirange{10,4932}@c
+.  Standard double precision values have a
+relative precision of
+@scinum{2.22,-16}
+and an exponent range of
+@scirange{10,308}@c
+.} In particular, comparisons involving extended
 precision values may fail where the equivalent double precision values
 would compare equal.
 @cindex rounding, floating-point arithmetic
