@@ -9,7 +9,7 @@ languages, this book explains how to use the compiler itself.
 
 The manual is written in TeXinfo, to generate the output use:
 
-    $ texi2pdf -I src/ -I includes/ gccintro.pdf
+    $ texi2pdf -I src/ -I includes/ gccintro.texi
 
 A printed edition of the book is published by Network Theory Ltd
 http://www.network-theory.co.uk/gcc/intro/ (ISBN 0954161793).
